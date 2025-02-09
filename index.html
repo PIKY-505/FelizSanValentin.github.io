@@ -7,19 +7,20 @@
     <link rel="stylesheet" href="estilos.css" />
   </head>
   <body>
-    <div class="intro-overlay" onclick="this.style.display='none'">
+    <div class="toggle-game" onclick="toggleGame()">🎮</div>
+    <div class="toggle-shop" onclick="toggleShop()">🛒</div>
+
+    <div class="intro-overlay" onclick="closeIntro()">
       <div class="intro-message">
-        <h1>Feliz san valentin</h1>
+        <h1>Feliz San Valentín</h1>
         <p>
-          Te queria hacer algo bonito y como creo que se me da fatal<br />
-          escribir y no creo que quede bonito pues lo hago como yo se.<br />
-          Se que no es lo mismo a tener un sobre el cual puedas leer <br />
-          siempre que quieras, pero espero que te guste igualmente:)<br />
-          Tienes videos de gatitos por si necesitas tu dosis de tiktok.<br />
-          Dale <b>click</b> cuando quieras para ver la pagina❤️
+          Te quería hacer algo bonito y como creo que se me da fatal
+          escribir...<br />
+          Dale <b>click</b> cuando quieras para ver la página❤️
         </p>
       </div>
     </div>
+
     <div class="video-container">
       <video autoplay loop muted>
         <source src="gatos.mp4" type="video/mp4" />
@@ -27,34 +28,127 @@
       </video>
     </div>
 
+    <div class="video-container">
+      <video autoplay loop muted>
+        <source src="gatos.mp4" type="video/mp4" />
+        Tu navegador no soporta videos.
+      </video>
+    </div>
+
+    <div class="coin-counter">Monedas: <span id="coinCount">0</span></div>
+
     <header>
-      <h1>Para el amor de mi vida ❤️</h1>
-      <img src="muac.gif" alt="Nuestra primera foto juntos" />
+      <div class="header-container">
+        <h1>Para el amor de mi vida ❤️</h1>
+        <img src="muac.gif" class="header-gif" />
+      </div>
     </header>
+
     <section class="message">
       <h2>Nuestra Historia</h2>
-      <p>
-        Desde el día en que nos conocimos, mi vida ha cambiado para mucho mejor.
-        Cada momento contigo es un regalo y quiero que esta página sea un
-        pequeño detalle para recordarte cuánto te amo. ❤️
-      </p>
+      <p>Desde el día en que nos conocimos, mi vida ha cambiado...</p>
     </section>
+
     <section class="gallery">
       <img src="primerafoto.jpg" alt="Nuestra primera foto juntos" />
       <img src="miestrella.jpg" alt="Un momento especial" />
       <img src="fotonormal.jpg" alt="Un viaje inolvidable" />
       <img src="fotonormal1.jpg" alt="Un viaje inolvidable" />
     </section>
+
+    <div class="cursor-shop">
+      <h2>Tienda de Cursores</h2>
+      <p>Selecciona un cursor (Costo: 5 monedas)</p>
+      <div class="cursor-options">
+        <img src="cursor1.png" onclick="buyCursor('cursor1.png', this)" />
+        <img src="cursor2.png" onclick="buyCursor('cursor2.png', this)" />
+        <img src="cursor3.png" onclick="buyCursor('cursor3.png', this)" />
+        <img src="cursor4.png" onclick="buyCursor('cursor4.png', this)" />
+        <img src="cursor5.png" onclick="buyCursor('cursor5.png', this)" />
+        <img src="cursor6.png" onclick="buyCursor('cursor6.png', this)" />
+        <img src="cursor7.png" onclick="buyCursor('cursor7.png', this)" />
+        <img src="cursor8.png" onclick="buyCursor('cursor8.png', this)" />
+        <img src="cursor9.png" onclick="buyCursor('cursor9.png', this)" />
+        <img src="cursor10.png" onclick="buyCursor('cursor10.png', this)" />
+      </div>
+    </div>
+
+    <section class="game">
+      <img class="coin" src="moneda.png" alt="Moneda" onclick="addCoin(this)" />
+      <img class="coin" src="moneda.png" alt="Moneda" onclick="addCoin(this)" />
+      <img class="coin" src="moneda.png" alt="Moneda" onclick="addCoin(this)" />
+    </section>
+
     <footer>
       <p>Con todo mi amor, para siempre.</p>
     </footer>
+
     <script>
-      document
-        .querySelector(".intro-overlay")
-        .addEventListener("click", function () {
-          this.style.display = "none";
-          document.querySelector(".video-container").style.display = "block";
+      function closeIntro() {
+        document.querySelector(".intro-overlay").style.display = "none";
+        document.querySelector(".video-container").style.display = "block"; // Muestra el video
+      }
+
+      let coinCount = 0;
+      let gameActive = false;
+
+      function addCoin(coin) {
+        coinCount++;
+        document.getElementById("coinCount").textContent = coinCount;
+        coin.style.display = "none";
+        setTimeout(() => respawnCoin(coin), 5000);
+      }
+
+      function respawnCoin(coin) {
+        if (!gameActive) return;
+        const maxX = window.innerWidth - 100;
+        const maxY = window.innerHeight - 100;
+        const newX = Math.random() * maxX;
+        const newY = Math.random() * maxY;
+        coin.style.left = `${newX}px`;
+        coin.style.top = `${newY}px`;
+        coin.style.display = "block";
+      }
+
+      function toggleGame() {
+        gameActive = !gameActive;
+        document.querySelectorAll(".coin").forEach((coin) => {
+          if (gameActive) {
+            coin.style.display = "block";
+            respawnCoin(coin); // Asegura que las monedas aparezcan en una posición aleatoria al activar el juego.
+          } else {
+            coin.style.display = "none";
+          }
         });
+        document.querySelector(".coin-counter").style.display = gameActive
+          ? "block"
+          : "none";
+      }
+
+      function toggleShop() {
+        document.querySelector(".cursor-shop").classList.toggle("active");
+      }
+
+      let purchasedCursors = {}; // Guarda los cursores comprados
+      let currentCursor = ""; // Guarda el cursor actual
+
+      function buyCursor(cursor, element) {
+        if (!purchasedCursors[cursor]) {
+          if (coinCount >= 5) {
+            coinCount -= 5;
+            document.getElementById("coinCount").textContent = coinCount;
+            purchasedCursors[cursor] = true; // Marcar cursor como comprado
+            element.style.opacity = "0.5"; // Indicar que fue comprado
+          } else {
+            alert("No tienes suficientes monedas!");
+            return;
+          }
+        }
+
+        // Aplicar el cursor seleccionado en toda la página
+        currentCursor = cursor;
+        document.body.style.cursor = `url(${cursor}) 32 32, auto`; // Tamaño ajustado
+      }
     </script>
   </body>
 </html>
