@@ -79,7 +79,6 @@ body {
   top: 50%;
   background: #ff99cc;
   padding: 10px;
-  cursor: pointer;
   border-radius: 0 10px 10px 0;
   font-weight: bold;
   color: white;
@@ -91,10 +90,21 @@ body {
   top: 56%;
   background: #ff99cc;
   padding: 10px;
-  cursor: pointer;
   border-radius: 0 10px 10px 0;
   font-weight: bold;
   color: white;
+}
+
+.toggle-trail-shop {
+  position: fixed;
+  left: 0;
+  top: 62%;
+  background: #ff99cc;
+  padding: 10px;
+  border-radius: 0 10px 10px 0;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
 }
 
 .cursor-shop {
@@ -114,6 +124,50 @@ body {
   left: 50px; /* Se despliega 50px desde el borde izquierdo */
 }
 
+.trail-shop {
+  position: fixed;
+  top: 50%;
+  left: -300px;
+  width: 250px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  transform: translateY(-50%);
+}
+
+.trail-shop.active {
+  left: 50px;
+}
+
+.trail-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.trail-options img {
+  width: 50px;
+  height: 50px;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border 0.2s;
+}
+
+.trail-options img:hover {
+  transform: scale(1.1);
+  border: 2px solid #ff99cc;
+}
+
+.mouse-trail {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+}
+
 .cursor-options {
   display: flex;
   flex-wrap: wrap;
@@ -124,7 +178,6 @@ body {
 .cursor-options img {
   width: 50px;
   height: 50px;
-  cursor: pointer;
   border: 2px solid transparent;
   transition: transform 0.2s, border 0.2s;
 }
@@ -134,10 +187,9 @@ body {
   border: 2px solid #ff99cc;
 }
 .coin {
-  width: 50px;
-  cursor: pointer;
   position: absolute;
-  transition: transform 0.3s ease-in-out;
+  width: 100px;
+  user-select: none;
   display: none;
 }
 
@@ -172,22 +224,60 @@ header {
   transform: scale(1.2);
 }
 
+#historia {
+  text-align: center;
+  padding: 0px 0px 10px;
+}
+
 .message {
   max-width: 900px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 10px 20px 10px 20px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: justify;
 }
 
 footer {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra el contenido */
+  padding: 10px 20px;
   background-color: #ff99cc;
-  padding: 10px;
   color: white;
-  margin-top: 100px;
+}
+
+.footer-text {
+  text-align: center;
 }
 
 .custom-cursor {
   cursor: url("cursor1.png") 32 32, auto;
+}
+
+.audio-player {
+  background: #f561ab;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  left: 20px;
+}
+
+.audio-player button {
+  background: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.audio-player span {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
 }

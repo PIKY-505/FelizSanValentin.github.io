@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tu y Yo</title>
+    <link rel="stylesheet" href="estilos.css" />
+  </head>
+  <body>
+    <div class="intro-overlay" onclick="this.style.display='none'">
+      <div class="intro-message">
+        <h1>Feliz san valentin</h1>
+        <p>
+          Te queria hacer algo bonito y como creo que se me da fatal<br />
+          escribir y no creo que quede bonito pues lo hago como yo se.<br />
+          Se que no es lo mismo a tener un sobre el cual puedas leer <br />
+          siempre que quieras, pero espero que te guste igualmente:)<br />
+          Tienes videos de gatitos por si necesitas tu dosis de tiktok.<br />
+          Dale <b>click</b> cuando quieras para ver la pagina❤️
+        </p>
+      </div>
+    </div>
+    <div class="video-container">
+      <video autoplay loop muted>
+        <source src="gatos.mp4" type="video/mp4" />
+        Tu navegador no soporta videos.
+      </video>
+    </div>
+    <div class="coin-counter">Monedas: <span id="coinCount">0</span></div>
+
+    <header>
+      <h1>Para el amor de mi vida ❤️</h1>
+      <img src="muac.gif" />
+    </header>
+    <section class="message">
+      <h2>Nuestra Historia</h2>
+      <p>
+        Desde el día en que nos conocimos, mi vida ha cambiado para mucho mejor.
+        Cada momento contigo es un regalo y quiero que esta página sea un
+        pequeño detalle para recordarte cuánto te amo. ❤️
+      </p>
+    </section>
+    <section class="gallery">
+      <img src="primerafoto.jpg" alt="Nuestra primera foto juntos" />
+      <img src="miestrella.jpg" alt="Un momento especial" />
+      <img src="fotonormal.jpg" alt="Un viaje inolvidable" />
+      <img src="fotonormal1.jpg" alt="Un viaje inolvidable" />
+    </section>
+
+    <section class="game">
+      <img class="coin" src="moneda.png" alt="Moneda" onclick="addCoin()" />
+      <img class="coin" src="moneda.png" alt="Moneda" onclick="addCoin()" />
+      <img class="coin" src="moneda.png" alt="Moneda" onclick="addCoin()" />
+    </section>
+
+    <footer>
+      <p>Con todo mi amor, para siempre.</p>
+    </footer>
+
+    <script>
+      document
+        .querySelector(".intro-overlay")
+        .addEventListener("click", function () {
+          this.style.display = "none";
+          document.querySelector(".video-container").style.display = "block";
+        });
+
+      let coinCount = 0;
+      function addCoin() {
+        coinCount++;
+        document.getElementById("coinCount").textContent = coinCount;
+      }
+    </script>
+  </body>
+</html>
