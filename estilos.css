@@ -281,3 +281,22 @@ footer {
   font-weight: bold;
   color: white;
 }
+
+.clikcbait:visited,
+.clikcbait:active,
+.clikcbait:hover {
+  color: #ffe6d0;
+}
+
+.clikcbait {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 132%;
+  transform: translateY(-50%);
+  padding: 10px;
+  color: #ffe6d0;
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: none;
+}
