@@ -5,11 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tu y Yo</title>
     <link rel="stylesheet" href="estilos.css" />
-    <script src="script.js"></script>
   </head>
   <body>
     <div class="toggle-game" onclick="toggleGame()">🎮</div>
     <div class="toggle-shop" onclick="toggleShop()">🛒</div>
+    <div class="toggle-shop" onclick="toggleShop(); toggleTrailShop()">🛒</div>
+    <div class="toggle-trail-shop" onclick="toggleTrailShop()">🦆</div>
+
+    <div class="trail-shop">
+      <h2>Tienda de Rastros</h2>
+      <p>(Costo: 10 monedas)</p>
+      <div class="trail-options">
+        <img src="pato1.png" onclick="buyTrail('pato1.png', this)" />
+        <img src="pato2.png" onclick="buyTrail('pato2.png', this)" />
+        <img src="gato.gif" onclick="buyTrail('gato.gif', this)" />
+        <img src="frog.gif" onclick="buyTrail('frog.gif', this)" />
+        <img
+          src="skeleton-run.gif"
+          onclick="buyTrail('skeleton-run.gif', this)"
+        />
+        <img src="apple.gif" onclick="buyTrail('apple.gif', this)" />
+      </div>
+    </div>
 
     <div class="intro-overlay" onclick="closeIntro()">
       <div class="intro-message">
@@ -29,14 +46,9 @@
       </video>
     </div>
 
-    <div class="video-container">
-      <video autoplay loop muted>
-        <source src="gatos.mp4" type="video/mp4" />
-        Tu navegador no soporta videos.
-      </video>
+    <div class="coin-counter">
+      Dases Salvajes: <span id="coinCount">0</span>
     </div>
-
-    <div class="coin-counter">Monedas: <span id="coinCount">0</span></div>
 
     <header>
       <div class="header-container">
@@ -46,8 +58,26 @@
     </header>
 
     <section class="message">
-      <h2>Nuestra Historia</h2>
-      <p>Desde el día en que nos conocimos, mi vida ha cambiado...</p>
+      <h2 id="historia">Nuestra Historia</h2>
+      <p>
+        ¡Feliz San Valentín, mi vida! Estoy seguro de que hoy lo hemos pasado
+        genial. Al fin y al cabo, cualquier plan a tu lado es un buen plan.
+        Espero que no te haya fastidiado que mi regalo no haya sido un juego,
+        aunque aquí hay algo parecido.
+      </p>
+
+      <p>
+        Realmente quería hacer algo más personal e íntimo, intentar explicar
+        todo lo que siento por ti. Y digo "intentar" porque, diga lo que diga,
+        nunca podría hacerte justicia.
+      </p>
+
+      <p>
+        Eres una de las personas más brillantes que podría haberme cruzado en la
+        vida. Y digo "brillante" porque iluminas de felicidad y cariño allá por
+        donde vas, con tu humor, que sería capaz de hacer reír hasta en medio de
+        un funeral.
+      </p>
     </section>
 
     <section class="gallery">
@@ -59,7 +89,7 @@
 
     <div class="cursor-shop">
       <h2>Tienda de Cursores</h2>
-      <p>Selecciona un cursor (Costo: 5 monedas)</p>
+      <p>(Costo: 5 monedas)</p>
       <div class="cursor-options">
         <img src="cursor1.png" onclick="buyCursor('cursor1.png', this)" />
         <img src="cursor2.png" onclick="buyCursor('cursor2.png', this)" />
@@ -81,7 +111,27 @@
     </section>
 
     <footer>
-      <p>Con todo mi amor, para siempre.</p>
+      <div class="audio-player">
+        <button onclick="prevSong()">⏮</button>
+        <button onclick="togglePlay()">▶/⏸</button>
+        <button onclick="nextSong()">⏭</button>
+
+        <input
+          type="range"
+          id="volume-slider"
+          min="0"
+          max="0.5"
+          step="0.01"
+          value="0.5"
+          oninput="changeVolume(this.value)"
+        />
+        <span id="song-title">baja el volumen y dale a ⏭</span>
+        <audio id="audio-player">
+          <source src="cancion1.mp3" type="audio/mp3" />
+        </audio>
+      </div>
+      <p class="footer-text">Con todo mi amor, para siempre.</p>
     </footer>
   </body>
+  <script src="script.js"></script>
 </html>
