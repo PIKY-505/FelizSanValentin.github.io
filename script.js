@@ -2,8 +2,8 @@ function closeIntro() {
   document.querySelector(".intro-overlay").style.display = "none";
   document.querySelector(".video-container").style.display = "block";
   document.querySelector(".audio-player").style.position = "absolute";
+  document.querySelector(".clikcbait").style.display = "block";
 }
-
 let coinCount = 0;
 let gameActive = false;
 
@@ -12,6 +12,22 @@ function addCoin(coin) {
   document.getElementById("coinCount").textContent = coinCount;
   coin.style.display = "none";
   setTimeout(() => respawnCoin(coin), 5000);
+}
+
+let coinSound = new Audio("dase.mp3");
+coinSound.volume = 1; // Asegurar volumen máximo
+
+function addShinyCoin(coin) {
+  coinCount += 4;
+  document.getElementById("coinCount").textContent = coinCount;
+
+  // Intentar reproducir el sonido y capturar errores
+  coinSound
+    .play()
+    .catch((error) => console.log("Error reproduciendo sonido:", error));
+
+  coin.style.display = "none";
+  setTimeout(spawnShinyCoin, 15000);
 }
 
 function respawnCoin(coin) {
@@ -25,6 +41,31 @@ function respawnCoin(coin) {
   coin.style.display = "block";
 }
 
+function spawnShinyCoin() {
+  if (!gameActive) return;
+  const shinyCoin = document.getElementById("shinyCoin");
+  if (!shinyCoin) return;
+
+  const maxX = window.innerWidth - 100;
+  const maxY = window.innerHeight - 100;
+  shinyCoin.style.left = `${Math.random() * maxX}px`;
+  shinyCoin.style.top = `${Math.random() * maxY}px`;
+  shinyCoin.style.display = "block";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const shinyCoin = document.getElementById("shinyCoin");
+  if (shinyCoin) {
+    shinyCoin.addEventListener("click", function () {
+      addShinyCoin(this);
+    });
+  } else {
+    console.error("El elemento shinyCoin no existe en el DOM.");
+  }
+
+  setTimeout(spawnShinyCoin, 15000);
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const coins = document.querySelectorAll(".coin");
   const speed = 3; // Velocidad base
@@ -33,8 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Posición y velocidad inicial aleatoria
     let x = Math.random() * (window.innerWidth - 50);
     let y = Math.random() * (window.innerHeight - 50);
-    let dx = (Math.random() - 0.5) * speed * 2;
-    let dy = (Math.random() - 0.5) * speed * 2;
+    let dx = (Math.random() - 0.5) * speed * 1.5;
+    let dy = (Math.random() - 0.5) * speed * 1.5;
 
     function moveCoin() {
       x += dx;
@@ -118,6 +159,10 @@ const songs = [
     title: "For You I'll Die - JAY SAV",
     src: "For You I'll Die - JAY SAV.mp3",
   },
+  {
+    title: "Let You Down - Dawid Podsiadło",
+    src: "Let You Down - Dawid Podsiadło.mp3",
+  },
 ];
 
 let ownedTrails = [];
@@ -193,6 +238,30 @@ function togglePlay() {
     audioPlayer.pause();
   }
 }
+
+function loadSong(index) {
+  const audioPlayer = document.getElementById("audio-player");
+  const songTitle = document.getElementById("song-title");
+
+  audioPlayer.src = songs[index].src; // Establece la fuente de la canción
+  songTitle.textContent = songs[index].title;
+
+  audioPlayer.load(); // Cargar la nueva canción
+  audioPlayer
+    .play()
+    .catch((error) => console.log("Error reproduciendo:", error));
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const audioPlayer = document.getElementById("audio-player");
+
+  audioPlayer.addEventListener("ended", function () {
+    nextSong(); // Llama a nextSong() cuando la canción termine
+  });
+
+  audioPlayer.volume = 0.5;
+  loadSong(currentSongIndex); // Cargar la primera canción al inicio
+});
 
 function nextSong() {
   currentSongIndex = (currentSongIndex + 1) % songs.length;
