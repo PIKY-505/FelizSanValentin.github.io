@@ -7,13 +7,6 @@ function closeIntro() {
 let coinCount = 0;
 let gameActive = false;
 
-function addCoin(coin) {
-  coinCount++;
-  document.getElementById("coinCount").textContent = coinCount;
-  coin.style.display = "none";
-  setTimeout(() => respawnCoin(coin), 5000);
-}
-
 let coinSound = new Audio("dase.mp3");
 coinSound.volume = 1; // Asegurar volumen máximo
 
@@ -28,17 +21,6 @@ function addShinyCoin(coin) {
 
   coin.style.display = "none";
   setTimeout(spawnShinyCoin, 15000);
-}
-
-function respawnCoin(coin) {
-  if (!gameActive) return;
-  const maxX = window.innerWidth - 100;
-  const maxY = window.innerHeight - 100;
-  const newX = Math.random() * maxX;
-  const newY = Math.random() * maxY;
-  coin.style.left = `${newX}px`;
-  coin.style.top = `${newY}px`;
-  coin.style.display = "block";
 }
 
 function spawnShinyCoin() {
@@ -65,6 +47,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   setTimeout(spawnShinyCoin, 15000);
 });
+
+function addCoin(coin) {
+  coinCount++;
+  document.getElementById("coinCount").textContent = coinCount;
+  coin.style.display = "none";
+  setTimeout(() => respawnCoin(coin), 5000);
+}
+
+function respawnCoin(coin) {
+  if (!gameActive) return;
+  const maxX = window.innerWidth - 100;
+  const maxY = window.innerHeight - 100;
+  const newX = Math.random() * maxX;
+  const newY = Math.random() * maxY;
+  coin.style.left = `${newX}px`;
+  coin.style.top = `${newY}px`;
+  coin.style.display = "block";
+}
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const coins = document.querySelectorAll(".coin");
