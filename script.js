@@ -225,7 +225,7 @@ function updateTrail() {
 
 updateTrail();
 
-let currentSongIndex = 0;
+let currentSongIndex = 1;
 const audioPlayer = document.getElementById("audio-player");
 const songTitle = document.getElementById("song-title");
 
