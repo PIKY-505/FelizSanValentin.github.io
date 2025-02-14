@@ -142,10 +142,6 @@ function buyCursor(cursor, element) {
 
 const songs = [
   {
-    title: "From The Start (Sped Up) - Laufey",
-    src: "From The Start (Sped Up) - Laufey.mp3",
-  },
-  {
     title: "una manera perfecta de morir - INTERROGACIÓN AMOR",
     src: "una manera perfecta de morir - INTERROGACIÓN AMOR.mp3",
   },
@@ -164,6 +160,10 @@ const songs = [
   {
     title: "Let You Down - Dawid Podsiadło",
     src: "Let You Down - Dawid Podsiadło.mp3",
+  },
+  {
+    title: "From The Start (Sped Up) - Laufey",
+    src: "From The Start (Sped Up) - Laufey.mp3",
   },
 ];
 
