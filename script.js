@@ -150,6 +150,8 @@ const songs = [
     title: "una manera perfecta de morir - INTERROGACIÓN AMOR",
     src: "una manera perfecta de morir - INTERROGACIÓN AMOR.mp3",
   },
+  { title: "Siesta Freestyle - Lewis OfMan", src: "Siesta Freestyle - Lewis OfMan.mp3" },
+  { title: "Algo Como Tú - Kaydy Cain", src: "Algo Como Tú - Kaydy Cain.mp3" },
   { title: "La cena - Las Petunias", src: "La cena - Las Petunias.mp3" },
   { title: "You and I - d4vd ", src: "You and I - d4vd .mp3" },
   { title: "Tek It - Cafuné", src: "Tek It - Cafuné.mp3" },
